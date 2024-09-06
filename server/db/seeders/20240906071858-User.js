@@ -10,6 +10,10 @@ module.exports = {
           name: 'Admin Adminov',
           points: 0,
         },
+        {
+          name: 'Test Testov',
+          points: 10,
+        },
       ],
       {}
     );
