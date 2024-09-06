@@ -2,7 +2,9 @@ import React from 'react'
 
 function Footer() {
   return (
-    <div>Сделано ванильками(Егор и Полина)</div>
+
+    <div className='footer'>Булочки ванильные</div>
+
   )
 }
 

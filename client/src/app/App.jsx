@@ -10,13 +10,10 @@ import QuestionPage from "../page/QuestionPage";
 function App() {
   const [themes, setThemes] = useState([]);
   const [questions, setQuestions] = useState([]);
-  // const [questionId, setQuestionId] = useState(1);
 
-console.log();
   const onHandleGetAllThemes = async () => {
     try {
       const { data } = await apiAxiosInstance.get("/themes");
-     // console.log(data);
       if (data.message === "success") {
         setThemes([...data.themes]);
       }
@@ -24,6 +21,7 @@ console.log();
       console.log(error);
     }
   };
+
 
   const onHandleGetAllQuestions = async () => {
     try {
@@ -33,21 +31,12 @@ console.log();
     } catch (error) {
       console.log(error);
     }
-  }
-
-
-
-  // const getQuestionId = (themeId) => {
-  //   const questionsByThemeId = questions.filter((que) => que.theme_id === themeId)
-  //   setQuestionId(questionsByThemeId[0].id) 
-  //   return questionId
-  // }
-
-
+  };
 
   useEffect(() => {
     onHandleGetAllThemes();
-    onHandleGetAllQuestions()
+    onHandleGetAllQuestions();
+
   }, []);
 
   return (
@@ -56,15 +45,14 @@ console.log();
         <Route path="/" element={<HomePage />} />
         <Route
           path="/themes"
-          element={<ThemesPage themes={themes} setQuestions={setQuestions}/>}
+
+          element={<ThemesPage themes={themes} setQuestions={setQuestions} questions={questions}/>}
         />
 
         <Route
-        path={'/themes/:themeId/questions/:questionId'}
+          path={"/themes/:themeId/questions/:questionId"}
           element={
-            <QuestionPage
-              questions={questions} setQuestions={setQuestions} 
-            />
+            <QuestionPage questions={questions} setQuestions={setQuestions} />
           }
         />
         <Route path="*" element={<ErrorPage />} />

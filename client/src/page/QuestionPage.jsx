@@ -8,9 +8,7 @@ function QuestionPage({ questions }) {
   console.log(statusOfQuestion);
   const [answer, setAnswer] = useState("");
   const navigate = useNavigate();
-  //const [themeQuestions, setThemeQuestions ] = us
 
-  //const queArr = questions.filter((quest) => quest.title_id === themeId)
 
   const handleAnswerChange = (event) => {
     event.preventDefault();
@@ -36,7 +34,9 @@ function QuestionPage({ questions }) {
           <button
             className="btn"
             onClick={(event) => {
-              if (answer === question?.answer) {
+
+              if (answer.trim().toLowerCase() === question?.answer.toLowerCase()) {
+
                 event.preventDefault();
                 setStatusOfQuestion(true);
               } else {
@@ -52,11 +52,7 @@ function QuestionPage({ questions }) {
             }
             className="btn"
           >
-            {/* if (questionId < queArr.length - 1) {
-              navigate(`/themes/${themeId}/questions/${+questionId + 1}`)
-            } else {
-              navigate("/Menu");
-            } */}
+
             Вперед
           </button>
         </div>
