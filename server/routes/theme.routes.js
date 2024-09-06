@@ -10,6 +10,4 @@ themeRouter.get('/', async (req, res) => {
   }
 });
 
-
-
 module.exports = themeRouter;
