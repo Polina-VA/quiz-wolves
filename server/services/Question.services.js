@@ -1,8 +1,14 @@
+
 const { Question } = require('../db/models');
 
 class QuestionService {
-  static getAllQuestion = async (id) =>
-    (await Question.findAll({ where: { theme_id: id } })).map((question) => question.get());
+  static getAllQuestion = async () =>
+    (await Question.findAll()).map((question) => question.get());
+
+  static getQuestionId = async (id) => {
+    const question = await Question.findOne({ where: { id } });
+    return question;
+  };
 }
 
 module.exports = QuestionService;
