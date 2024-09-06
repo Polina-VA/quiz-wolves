@@ -6,7 +6,6 @@ const questionRouter = require('./question.routes');
 
 apiRouter.use('/themes', themeRouter);
 apiRouter.use('/questions', questionRouter);
-apiRouter.use('/users', )
 
 apiRouter.use('*', errorRouter);
 
