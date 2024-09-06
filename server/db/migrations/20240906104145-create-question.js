@@ -7,35 +7,39 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       theme_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: 'Themes',
-          key: 'id',
-        },
+          key: 'id'
+        }
       },
       question: {
         allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT
       },
       answer: {
         allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT
+      },
+      image: {
+        allowNull: false,
+        type: Sequelize.TEXT
       },
       createdAt: {
         defaultValue: new Date(),
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
         defaultValue: new Date(),
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Questions');
-  },
+  }
 };
