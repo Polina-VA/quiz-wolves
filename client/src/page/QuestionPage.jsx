@@ -34,7 +34,9 @@ function QuestionPage({ questions }) {
           <button
             className="btn"
             onClick={(event) => {
+
               if (answer.trim().toLowerCase() === question?.answer.toLowerCase()) {
+
                 event.preventDefault();
                 setStatusOfQuestion(true);
               } else {
@@ -50,6 +52,7 @@ function QuestionPage({ questions }) {
             }
             className="btn"
           >
+
             Вперед
           </button>
         </div>

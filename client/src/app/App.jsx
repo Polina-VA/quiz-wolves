@@ -11,7 +11,6 @@ function App() {
   const [themes, setThemes] = useState([]);
   const [questions, setQuestions] = useState([]);
 
-  console.log();
   const onHandleGetAllThemes = async () => {
     try {
       const { data } = await apiAxiosInstance.get("/themes");
@@ -22,6 +21,7 @@ function App() {
       console.log(error);
     }
   };
+
 
   const onHandleGetAllQuestions = async () => {
     try {
@@ -36,6 +36,7 @@ function App() {
   useEffect(() => {
     onHandleGetAllThemes();
     onHandleGetAllQuestions();
+
   }, []);
 
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/themes"
+
           element={<ThemesPage themes={themes} setQuestions={setQuestions} questions={questions}/>}
         />
 
