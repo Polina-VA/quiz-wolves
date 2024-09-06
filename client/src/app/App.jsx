@@ -10,9 +10,9 @@ import QuestionPage from "../page/QuestionPage";
 function App() {
   const [themes, setThemes] = useState([]);
   const [questions, setQuestions] = useState([]);
-  const [questionId, setQuestionId] = useState(1);
+  // const [questionId, setQuestionId] = useState(1);
 
-
+console.log();
   const onHandleGetAllThemes = async () => {
     try {
       const { data } = await apiAxiosInstance.get("/themes");
@@ -35,11 +35,13 @@ function App() {
     }
   }
 
-  const getQuestionId = (themeId) => {
-    const questionsByThemeId = questions.filter((que) => que.theme_id === themeId)
-    setQuestionId(questionsByThemeId[0].id) 
-    return questionId
-  }
+
+
+  // const getQuestionId = (themeId) => {
+  //   const questionsByThemeId = questions.filter((que) => que.theme_id === themeId)
+  //   setQuestionId(questionsByThemeId[0].id) 
+  //   return questionId
+  // }
 
 
 
@@ -54,14 +56,14 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/themes"
-          element={<ThemesPage themes={themes} getQuestionId={getQuestionId} />}
+          element={<ThemesPage themes={themes} setQuestions={setQuestions}/>}
         />
 
         <Route
-        path={'/questions/${questionId}'}
+        path={'/themes/:themeId/questions/:questionId'}
           element={
             <QuestionPage
-              questions={questions} setQuestions={setQuestions} getQuestionId={getQuestionId}
+              questions={questions} setQuestions={setQuestions} 
             />
           }
         />

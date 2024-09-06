@@ -1,76 +1,72 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import apiAxiosInstance from '../services/apiAxiosInstance';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-function QuestionPage({ questions}) {
-   const { questionId} = useParams
+function QuestionPage({ questions }) {
+  const { themeId, questionId } = useParams();
 
-  const [questionsByThemeId, setQuestionsByThemeId] = useState([])
+  const [statusOfQuestion, setStatusOfQuestion] = useState(false);
+  console.log(statusOfQuestion);
+  const [answer, setAnswer] = useState("");
+  const navigate = useNavigate();
+  //const [themeQuestions, setThemeQuestions ] = us
 
-   const [statusOfQuestion, setStatusOfQuestion] = useState(false);
-   const [answer, setAnswer] = useState("");
-   const navigate = useNavigate();
-  
-  
-console.log(questionsByThemeId);
-  //  const onHandleGetQuestion = async (questionId) => {
-  //   try {
-  //     const { data } = await apiAxiosInstance.get(`/questions/${questionId}`);
-
-  //     //setQuestions([...data.questions]);
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  //const queArr = questions.filter((quest) => quest.title_id === themeId)
 
   const handleAnswerChange = (event) => {
     event.preventDefault();
     setAnswer(event.target.value);
   };
-
-  useEffect(() => {
-    // setQuestionsByThemeId(questions.filter((que) => que.theme_id === themeId))
-  }, [])
-
+  const question = questions.find(
+    (que) => que.theme_id === +themeId && que.id === +questionId
+  );
+  console.log(question);
   return (
-    <div className='questionContainer'>
-     <img className="img" src={questionsByThemeId[questionId]?.image} />
-        <div>{questionsByThemeId[questionId]?.question}</div>
-        <input
-          onChange={handleAnswerChange}
-          className="input"
-          placeholder="Каков ваш ответ?"
-        />
-        <button
-          className="btn"
-          onClick={(event) => {
-            if (answer === questionsByThemeId[questionId]?.answer) {
-              event.preventDefault();
-              questionId += 1);
-              alert("правильно!");
-            } else {
-              alert("Ты ошибся");
+    <>
+      {question && question ? (
+        <div className="questionContainer">
+          <img className="img" src={question?.image} />
+          <div>{question?.question}</div>
+          <input
+            onChange={handleAnswerChange}
+            className="input"
+            value={answer}
+            placeholder="Каков ваш ответ?"
+          />
+          {statusOfQuestion ? <div>Правильно!</div> : <div>Неa, не угадал</div>}
+          <button
+            className="btn"
+            onClick={(event) => {
+              if (answer === question?.answer) {
+                event.preventDefault();
+                setStatusOfQuestion(true);
+              } else {
+                setStatusOfQuestion(false);
+              }
+            }}
+          >
+            Проверить
+          </button>
+          <button
+            onClick={() =>
+              navigate(`/themes/${themeId}/questions/${+questionId + 1}`)
             }
-          }}
-        >
-          Проверить
-        </button>
-        <button
-          className="btn"
-          onClick={() => {
-            if (currentQuestion < questionsByThemeId.length - 1) {
-              setCurrentQuestion((prev) => prev + 1);
+            className="btn"
+          >
+            {/* if (questionId < queArr.length - 1) {
+              navigate(`/themes/${themeId}/questions/${+questionId + 1}`)
             } else {
               navigate("/Menu");
-            }
-          }}
-
-        >
-          Вперед
+            } */}
+            Вперед
+          </button>
+        </div>
+      ) : (
+        <button onClick={() => navigate(`/themes`)} className="btn">
+          Вернуться в меню
         </button>
-    </div>
-  )
+      )}
+    </>
+  );
 }
 
-export default QuestionPage
+export default QuestionPage;
