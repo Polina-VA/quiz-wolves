@@ -15,6 +15,7 @@ questionRouter.get('/:id', async (req, res) => {
     const { id } = req.params;
     const question = await QuestionService.getQuestionId(id);
     res.status(200).json({ message: 'success', question });
+
   } catch ({ message }) {
     res.status(500).json({ error: message });
   }

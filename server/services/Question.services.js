@@ -1,4 +1,4 @@
-const { where } = require('sequelize');
+
 const { Question } = require('../db/models');
 
 class QuestionService {
